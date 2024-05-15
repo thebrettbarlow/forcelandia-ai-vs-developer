@@ -3,8 +3,8 @@
     <fullName>All</fullName>
     <columns>ACCOUNT.NAME</columns>
     <columns>ACCOUNT.URL</columns>
+    <columns>ACCOUNT.ADDRESS1_CITY</columns>
     <columns>ACCOUNT.ADDRESS1_STATE</columns>
-    <columns>Number_of_Check_Ins__c</columns>
     <columns>Untappd_Id__c</columns>
     <filterScope>Everything</filterScope>
     <label>All</label>
