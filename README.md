@@ -6,7 +6,17 @@ Example project that was presented at [Forcelandia](https://forcelandia.com/)
 
 ---
 
-TODO: add a description here
+In the ultimate showdown of man vs machine, Chuck Liddell takes on AI in a
+coding challenge. The task is to build an integration between Salesforce and the
+Untappd API.
+
+During the session, we will use AI to generate code to solve the problem. We'll
+then compare it to the code written by the human developer.
+
+We hope to show some practical ways of using AI for coding tasks. We'll also
+talk about how to break down a problem into smaller steps and how this can help
+you create a more robust solution (whether you code it yourself or AI does it
+for you).
 
 ## Development
 
