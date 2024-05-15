@@ -18,6 +18,24 @@ talk about how to break down a problem into smaller steps and how this can help
 you create a more robust solution (whether you code it yourself or AI does it
 for you).
 
+## Coding Challenge
+
+Retrieve and store Untappd check-in data for Deschutes Brewery.
+
+- Each check-in should be related to the Deschutes Brewery `Account` record
+- Each beer should be stored as its own `Beer__c` record
+  - Include the following: Name, Style, ABV
+- Each check-in should be stored as its own `Check_In__c` record
+  - Include the following: Rating, Comment, Date, Number of Toasts, Number of
+    Comments
+
+Notes about schema:
+
+- `Account` is a parent of `Beer__c` using a master-detail relationship
+- `Beer__c` is a parent of `Check_In__c` using a master-detail relationship
+- We have created rollup summary fields on `Account` and `Beer__c` to summarize
+  check-in data
+
 ## Development
 
 ### Connect to the Dev Hub
