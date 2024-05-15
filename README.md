@@ -1,6 +1,7 @@
 # AI vs Developer
 
-Example project that was presented at [Forcelandia](https://forcelandia.com/) 2024
+Example project that was presented at [Forcelandia](https://forcelandia.com/)
+2024
 ([slides](https://docs.google.com/presentation/d/1ixLbpmlmjEViQk-yFNO48o-neB7WEQt3iKf0yqnT5GY/edit?usp=sharing)).
 
 ---

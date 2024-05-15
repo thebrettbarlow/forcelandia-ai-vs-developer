@@ -6,5 +6,13 @@
     "@locker/eslint-config-locker/recommended",
     "prettier"
   ],
-  "ignorePatterns": ["node_modules/", "sf_modules/", "**/staticresources/"]
+  "ignorePatterns": [
+    "node_modules/",
+    "sf_modules/",
+    "**/staticresources/",
+    "*.md",
+    "LICENSE",
+    "package.json",
+    "sfdx-project.json"
+  ]
 }
