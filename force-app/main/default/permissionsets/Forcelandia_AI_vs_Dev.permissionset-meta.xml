@@ -7,6 +7,11 @@
     <description>Grants permissions to metadata related to the coding challenge done at Forcelandia 2024.</description>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Account.Number_of_Check_Ins__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Account.Untappd_Id__c</field>
         <readable>true</readable>
     </fieldPermissions>
