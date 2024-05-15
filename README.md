@@ -66,13 +66,43 @@ sf project deploy start \
   --verbose
 ```
 
+### Assign permission sets
+
+```shell
+target_org="forcelandia-ai-vs-dev--scratch"
+
+sf org assign permset \
+  --target-org="${target_org}" \
+  --name=Forcelandia_AI_vs_Dev
+```
+
 ### Run all tests
 
 ```shell
-org_alias="forcelandia-ai-vs-dev--scratch"
+target_org="forcelandia-ai-vs-dev--scratch"
 
 sf apex test run \
-  --target-org="${org_alias}" \
+  --target-org="${target_org}" \
   --wait=10 \
   --code-coverage
+```
+
+### Retrieve non-code metadata
+
+```shell
+target_org="forcelandia-ai-vs-dev--scratch"
+
+sf project retrieve start \
+  --target-org="${target_org}" \
+  --metadata=CustomApplication:standard__LightningSales \
+  --metadata=PermissionSet:Forcelandia_AI_vs_Dev \
+  --metadata=CustomObject:Account \
+  --metadata=CustomObject:Beer__c \
+  --metadata=CustomObject:Check_In__c \
+  --metadata="Layout:Account-Account Layout" \
+  --metadata="Layout:Beer__c-Beer Layout" \
+  --metadata="Layout:Check_In__c-Check-In Layout" \
+  --metadata=Flexipage:Account_Record_Page \
+  --metadata=Flexipage:Beer_Record_Page \
+  --metadata=Flexipage:Check_In_Record_Page
 ```
