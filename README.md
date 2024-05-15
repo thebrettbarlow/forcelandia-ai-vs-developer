@@ -1,18 +1,49 @@
-# Salesforce DX Project: Next Steps
+# AI vs Developer
 
-Now that you’ve created a Salesforce DX project, what’s next? Here are some documentation resources to get you started.
+Example project that was presented at [Forcelandia](https://forcelandia.com/) 2024
+([slides](https://docs.google.com/presentation/d/1ixLbpmlmjEViQk-yFNO48o-neB7WEQt3iKf0yqnT5GY/edit?usp=sharing)).
 
-## How Do You Plan to Deploy Your Changes?
+---
 
-Do you want to deploy a set of changes, or create a self-contained application? Choose a [development model](https://developer.salesforce.com/tools/vscode/en/user-guide/development-models).
+TODO: add a description here
 
-## Configure Your Salesforce DX Project
+## Development
 
-The `sfdx-project.json` file contains useful configuration information for your project. See [Salesforce DX Project Configuration](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_ws_config.htm) in the _Salesforce DX Developer Guide_ for details about this file.
+### Connect to the Dev Hub
 
-## Read All About It
+```shell
+org_alias="forcelandia-ai-vs-dev"
 
-- [Salesforce Extensions Documentation](https://developer.salesforce.com/tools/vscode/)
-- [Salesforce CLI Setup Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_intro.htm)
-- [Salesforce DX Developer Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_intro.htm)
-- [Salesforce CLI Command Reference](https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference.htm)
+sf org login web \
+  --alias="${org_alias}" \
+  --set-default-dev-hub
+```
+
+### Make a scratch org
+
+```shell
+org_alias="forcelandia-ai-vs-dev--scratch"
+
+sf org create scratch \
+  --alias="${org_alias}" \
+  --definition-file=config/project-scratch-def.json \
+  --duration-days=30 \
+  --set-default
+
+sf project deploy start \
+  --source-dir=force-app \
+  --wait=10 \
+  --ignore-conflicts \
+  --verbose
+```
+
+### Run all tests
+
+```shell
+org_alias="forcelandia-ai-vs-dev--scratch"
+
+sf apex test run \
+  --target-org="${org_alias}" \
+  --wait=10 \
+  --code-coverage
+```
