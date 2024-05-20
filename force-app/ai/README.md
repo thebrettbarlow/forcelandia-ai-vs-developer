@@ -4,22 +4,30 @@ Contains files used by Team AI to solve the coding challenge.
 
 ---
 
+## Structure
+
+If time permits, I'd like to attempt a "train of thought" build to incrementally
+build the entire integration. I'll need to experiment to find the right thought
+pattern to follow. Or it'll crash and burn, which could be fun to watch too.
+
+Aside from that, I'd like to showcase the human design + AI build approach. This
+is a more realistic takeaway, so I'm going to start with this.
+
 ## TODOs
 
 Notes to self about what else needs to be done:
 
-- Write a prompt to generate the [Data Structures](#data-structures)
-  - Use the builder pattern. Also include `toJson()` and `toSObject()`
-- Write prompts to implement each method of `UntappdRepository`
-- Write a prompt to generate a test for `UntappdRepository`
-- Write prompts to implement each method of `UntappdApi`
-- Write a prompt to generate a test for `UntappdApi`
-- Write prompts to implement each method of `LimitsChecker`
-- Write a prompt to generate a test for `LimitsChecker`
-- Write a prompt to generate a `Mock` from an interface
+- [x] Write a prompt to generate the [Data Structures](#data-structures)
+- [x] Write prompts to implement each method of `UntappdRepository`
+- [x] Write a prompt to generate a test for `UntappdRepository`
+- [ ] Write prompts to implement each method of `UntappdApi`
+- [ ] Write a prompt to generate a test for `UntappdApi`
+- [ ] Write prompts to implement each method of `LimitsChecker`
+- [ ] Write a prompt to generate a test for `LimitsChecker`
+- [ ] Write a prompt to generate a `Mock` from an interface
   - Also add an example usage to this doc below
-- Write a prompt to generate a test for `UpsertUntappdCheckInsQueueable`
-- Write a prompt to generate a test for `UntappdPipeline`
+- [ ] Write a prompt to generate a test for `UpsertUntappdCheckInsQueueable`
+- [ ] Write a prompt to generate a test for `UntappdPipeline`
 
 ## Technical Design
 
