@@ -4,143 +4,49 @@ Contains files used by Team AI to solve the coding challenge.
 
 ---
 
-## Structure
-
-If time permits, I'd like to attempt a "train of thought" build to incrementally
-build the entire integration. I'll need to experiment to find the right thought
-pattern to follow. Or it'll crash and burn, which could be fun to watch too.
-
-Aside from that, I'd like to showcase the human design + AI build approach. This
-is a more realistic takeaway, so I'm going to start with this.
-
-## TODOs
-
-Notes to self about what else needs to be done:
-
-- [x] Write a prompt to generate the [Data Structures](#data-structures)
-- [x] Write prompts to implement each method of `UntappdRepository`
-- [x] Write a prompt to generate a test for `UntappdRepository`
-- [ ] Write prompts to implement each method of `UntappdApi`
-- [ ] Write a prompt to generate a test for `UntappdApi`
-- [ ] Write prompts to implement each method of `LimitsChecker`
-- [ ] Write a prompt to generate a test for `LimitsChecker`
-- [ ] Write a prompt to generate a `Mock` from an interface
-  - Also add an example usage to this doc below
-- [ ] Write a prompt to generate a test for `UpsertUntappdCheckInsQueueable`
-- [ ] Write a prompt to generate a test for `UntappdPipeline`
-
 ## Technical Design
 
 ### Objective
 
-The end goal is to run this and have it populate all `Beer__c` and `Check_In__c`
-data for the Deschutes Brewery `Account`:
+The end goal is to be able to use Anonymous Apex to run the following code and
+have it populate all `Beer__c` and `Check_In__c` data for the Deschutes Brewery
+`Account`:
 
 ```apex
-UntappdPipeline.run('Deschutes Brewery');
-```
+final String breweryName = 'Deschutes Brewery';
+UntappdApi untappdApi = new UntappdApiImpl();
+UntappdRepository untappdRepository = new UntappdRepositoryImpl();
 
-### High-Level Plan
-
-We can get data about the brewery and the beers they produce in a couple of API
-calls. I don't think Deschutes produces more than 10k beers, so we should be
-safe to do these API calls and upsert the data right after. From there, we'll
-use a `Queueable` to get the check-ins for each beer. We'll need to be careful
-about exceeding limits, so we'll need to check for that.
-
-```apex
-public class UntappdPipeline {
-  @TestVisible
-  private static UntappdApi untappdApi = new UntappdApiImpl();
-  @TestVisible
-  private static UntappdRepository untappdRepository = new UntappdRepositoryImpl();
-  @TestVisible
-  private static LimitsChecker limitsChecker = new LimitsCheckerImpl();
-
-  public static void run(String breweryName) {
-    UntappdBrewery brewery = untappdRepository.getBreweryByName(breweryName);
-    untappdRepository.upsertBrewery(brewery);
-
-    List<UntappdBeer> beers = untappdRepository.getBeersForBrewery(
-      brewery.getId()
-    );
-    untappdRepository.upsertBeers(beers);
-
-    System.enqueueJob(
-      new UpsertUntappdCheckInsQueueable(
-        untappdApi,
-        untappdRepository,
-        limitsChecker,
-        beers
-      )
-    );
-  }
-
-  private static UntappdBrewery getBreweryByName(String breweryName) {
-    Map<Integer, String> breweries = untappdApi.searchBreweries(breweryName);
-    for (Integer id : breweries.keySet()) {
-      if (breweries.get(id) == breweryName) {
-        return untappdApi.getBreweryInfo(id);
-      }
+Map<Integer, String> breweries = untappdApi.searchBreweries(breweryName);
+UntappdBrewery brewery;
+for (Integer id : breweries.keySet()) {
+    if (breweries.get(id) == breweryName) {
+        brewery = untappdApi.getBreweryInfo(id);
     }
-
-    throw new UntappdException(
-      String.format(
-        'Brewery not found in Untappd: {0}.',
-        new List<Object>{ breweryName }
-      )
-    );
-  }
 }
-```
 
-```apex
-public class UpsertUntappdCheckInsQueueable implements Queueable, Database.AllowsCallouts {
-  private final UntappdApi untappdApi;
-  private final UntappdRepository untappdRepository;
-  private final LimitsChecker limitsChecker;
-  private final List<UntappdBeer> beers;
-
-  public UpsertUntappdCheckInsQueueable(
-    UntappdApi untappdApi,
-    UntappdRepository untappdRepository,
-    LimitsChecker limitsChecker,
-    List<UntappdBeer> beers
-  ) {
-    this.untappdApi = untappdApi;
-    this.untappdRepository = untappdRepository;
-    this.limitsChecker = limitsChecker;
-    this.beers = beers;
-  }
-
-  public void execute(QueueableContext context) {
-    while (
-      limitsChecker.canCallout() && limitsChecker.getProcessingLimitUsage() < 80
-    ) {
-      List<UntappdCheckIn> checkIns = untappdRepository.getCheckInsForBeer(
-        beers[0].getId()
-      );
-
-      if (limitsChecker.canDml(checkIns.size())) {
-        untappdRepository.upsertCheckins(checkIns);
-        beers.remove(0);
-      } else {
-        break;
-      }
-    }
-
-    if (beers.size() > 0) {
-      System.enqueueJob(
-        new UpsertUntappdCheckInsQueueable(
-          untappdApi,
-          untappdRepository,
-          limitsChecker,
-          beers
-        )
-      );
-    }
-  }
+if (brewery == null) {
+    throw new IllegalArgumentException(
+            String.format('Brewery not found in Untappd: {0}', new List<Object>{ breweryName })
+    );
 }
+Account account = untappdRepository.upsertBrewery(brewery);
+
+List<Beer__c> beers = new List<Beer__c>();
+for (UntappdBeer untappdBeer : brewery.getBeers()) {
+    Beer__c beer = untappdBeer.toSObject();
+    beer.Brewery__c = account.Id;
+
+    beers.add(beer);
+}
+untappdRepository.upsertBeers(beers);
+
+List<UntappdCheckIn> checkIns = new List<UntappdCheckIn>();
+for (UntappdBeer untappdBeer : brewery.getBeers()) {
+    // Not implementing pagination because we can only do 100 calls per hour
+    checkIns.addAll(untappdApi.getBeerCheckIns(untappdBeer.getId()));
+}
+untappdRepository.upsertCheckins(checkIns);
 ```
 
 ### Interfaces
@@ -176,10 +82,7 @@ public interface UntappdApi {
    *
    * @see https://untappd.com/api/docs#beeractivityfeed
    */
-  UntappdBeerActivityFeed getBeerActivityFeed(
-    Long beerId,
-    UntappdPagination pagination
-  );
+  List<UntappdCheckIn> getBeerCheckIns(Long beerId);
 }
 ```
 
@@ -202,27 +105,6 @@ public interface UntappdRepository {
    * Upserts the given {@link UntappdCheckIn}s as {@link Check_In__c} records.
    */
   List<Check_In__c> upsertCheckins(List<UntappdCheckIn> checkIns);
-}
-```
-
-```apex
-public interface LimitsChecker {
-  /**
-   * Returns {@code true} when the transaction has enough limits left to perform DML on the given
-   * number of records.
-   */
-  Boolean canDml(Integer recordsToDml);
-
-  /**
-   * Returns {@code true} when the transaction has enough limits left to perform a callout.
-   */
-  Boolean canCallout();
-
-  /**
-   * Evaluates processing-related limits (e.g. heap size, CPU time, etc.) and returns a number
-   * between 0 and 100 that represents the percentage of the highest limit used.
-   */
-  Integer getProcessingLimitUsage();
 }
 ```
 
@@ -254,21 +136,6 @@ public class UntappdBeer {
 ```
 
 ```apex
-public class UntappdBeerActivityFeed {
-  private final UntappdPagination pagination;
-  private final List<UntappdCheckIn> checkIns;
-}
-```
-
-```apex
-public class UntappdPagination {
-  private final String sinceUrl;
-  private final String nextUrl;
-  private final Long maxId;
-}
-```
-
-```apex
 public class UntappdCheckIn {
   private final Long id;
   private final Long beerId;
@@ -278,13 +145,4 @@ public class UntappdCheckIn {
   private final Integer toasts;
   private final Integer comments;
 }
-```
-
-### Mocking Framework
-
-We will use a simple mocking framework to allow us to test each class in
-isolation. Here is an example usage of the framework:
-
-```apex
-// TODO: add example
 ```
