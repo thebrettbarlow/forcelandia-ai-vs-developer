@@ -19,6 +19,10 @@ public inherited sharing class Burger {
     return numberOfPatties;
   }
 
+  public Builder toBuilder() {
+    return new Builder(this);
+  }
+
   public String toJson() {
     return JSON.serialize(this);
   }
@@ -29,6 +33,10 @@ public inherited sharing class Burger {
       Has_Cheese__c = hasCheese,
       Number_of_Patties__c = numberOfPatties
     );
+  }
+
+  public static Burger.Builder newBuilder() {
+    return new Builder();
   }
 
   public class Builder {
@@ -53,6 +61,15 @@ public inherited sharing class Burger {
 
     public Burger build() {
       return new Burger(this);
+    }
+
+    private Builder() {
+    }
+
+    private Builder(Burger burger) {
+      bun = burger.bun;
+      hasCheese = burger.hasCheese;
+      numberOfPatties = burger.numberOfPatties;
     }
   }
 
