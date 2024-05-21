@@ -99,9 +99,11 @@ sf project retrieve start \
   --metadata=CustomObject:Account \
   --metadata=CustomObject:Beer__c \
   --metadata=CustomObject:Check_In__c \
+  --metadata=CustomObject:Untappd_API_Configuration__mdt \
   --metadata="Layout:Account-Account Layout" \
   --metadata="Layout:Beer__c-Beer Layout" \
   --metadata="Layout:Check_In__c-Check-In Layout" \
+  --metadata="Layout:Untappd_API_Configuration__mdt-Untappd API Configuration Layout" \
   --metadata=Flexipage:Account_Record_Page \
   --metadata=Flexipage:Beer_Record_Page \
   --metadata=Flexipage:Check_In_Record_Page
