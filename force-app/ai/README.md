@@ -4,6 +4,16 @@ Contains files used by Team AI to solve the coding challenge.
 
 ---
 
+## TODOs
+
+- [ ] Update the API generation to have a method that builds `HttpRequest`
+  - We need to do this in a way that lets us use the values from the CMDT. Or
+    maybe we pass a Map<String, Object> in as `authenticationParameters`? We
+    could accept another parameter of `endpoint`, which will be the base
+    endpoint
+- [ ] End-to-end testing
+- [ ] Outline the key takeaways
+
 ## Technical Design
 
 ### Objective
