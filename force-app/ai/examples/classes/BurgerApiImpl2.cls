@@ -2,17 +2,15 @@
  * Implementation of {@link BurgerApi}.
  */
 public inherited sharing class BurgerApiImpl2 implements BurgerApi {
-  private final HttpRequestFactory httpRequestFactory;
-  private final Type exceptionType;
+  private final Map<String, Object> authParams;
 
-  public BurgerApiImpl2(HttpRequestFactory httpRequestFactory, Type exceptionType) {
-    this.httpRequestFactory = httpRequestFactory;
-    this.exceptionType = exceptionType;
+  public BurgerApiImpl2(Map<String, Object> authParams) {
+    this.authParams = authParams;
   }
 
   public List<Burger> searchBurgers(String query) {
     String endpoint = '/search/burger';
-    HttpRequest httpRequest = httpRequestFactory.create(endpoint);
+    HttpRequest httpRequest = createRequest(endpoint);
     httpRequest.setMethod('GET');
     addUrlParameter(httpRequest, 'q', query);
 
@@ -37,7 +35,7 @@ public inherited sharing class BurgerApiImpl2 implements BurgerApi {
 
   public BurgerOrderResponse orderBurger(BurgerOrderRequest request) {
     String endpoint = '/burger';
-    HttpRequest httpRequest = httpRequestFactory.create(endpoint);
+    HttpRequest httpRequest = createRequest(endpoint);
     httpRequest.setMethod('POST');
     httpRequest.setBody(request.toJson());
 
@@ -49,13 +47,27 @@ public inherited sharing class BurgerApiImpl2 implements BurgerApi {
     return BurgerOrderResponse.newBuilder().setOrderId((String) result.get('order_id')).build();
   }
 
-  private HttpResponse send(HttpRequest request) {
+  private HttpRequest createRequest(String endpoint) {
+    HttpRequest httpRequest = new HttpRequest();
+    httpRequest.setEndpoint(
+      String.format(
+        '{0}{1}?client_id={2}&client_secret={3}',
+        new List<Object>{
+          authParams.get('url'),
+          endpoint,
+          authParams.get('client_id'),
+          authParams.get('client_secret')
+        }
+      )
+    );
+
+    return httpRequest;
+  }
+
+  private static HttpResponse send(HttpRequest request) {
     HttpResponse response = new Http().send(request);
     if (response.getStatusCode() >= 300) {
-      Exception e = (Exception) exceptionType.newInstance();
-      e.setMessage(response.getBody());
-
-      throw e;
+      throw new CalloutException(response.getBody());
     }
 
     return response;

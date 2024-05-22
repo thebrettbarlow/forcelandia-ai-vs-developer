@@ -10,17 +10,20 @@ Your task is to implement an Interface that represents an API. The result must
 meet the following requirements:
 
 - Accept the following constructor parameters:
-  - `HttpRequestFactory`
-  - `Type` of an `Exception` to throw when an error occurs
+  - `Map<String, Object>` that contains authentication parameters
+- Include a `private HttpRequest createRequest(String endpoint)` method
+  - This method should return a new `HttpRequest` that has been built using the
+    endpoint and authentication parameters
 - Include a `private HttpResponse send(HttpRequest request)` method
-  - When the response contains a status code >= 300, throw the exception
+  - When the response contains a status code >= 300, throw a CalloutException
 - Include a
   `private static String addUrlParameter(String url, String key, String value)`
   method
   - This method should return a new URL with the key-value pair added as a query
     parameter
 - Implement each method to meet the following requirements:
-  - Create a new `HttpRequest` using `HttpRequestFactory`
+  - Create a new `HttpRequest` using `createRequest(String endpoint)`
+  - Leave the `endpoint` variable as an empty `String`
   - Add a comment directly below this line with "TODO: modify request
     parameters"
   - Use `send(HttpRequest)` to send the request
@@ -47,20 +50,15 @@ public interface BurgerApi {
  * Implementation of {@link BurgerApi}.
  */
 public inherited sharing class BurgerApiImpl implements BurgerApi {
-  private final HttpRequestFactory httpRequestFactory;
-  private final Type exceptionType;
+  private final Map<String, Object> authParams;
 
-  public BurgerApi1Impl(
-    HttpRequestFactory httpRequestFactory,
-    Type exceptionType
-  ) {
-    this.httpRequestFactory = httpRequestFactory;
-    this.exceptionType = exceptionType;
+  public BurgerApiImpl(Map<String, Object> authParams) {
+    this.authParams = authParams;
   }
 
   public List<Burger> searchBurgers(String query) {
     String endpoint = '';
-    HttpRequest httpRequest = httpRequestFactory.create(endpoint);
+    HttpRequest httpRequest = createRequest(endpoint);
     // TODO: modify request parameters
 
     HttpResponse httpResponse = send(httpRequest);
@@ -71,7 +69,7 @@ public inherited sharing class BurgerApiImpl implements BurgerApi {
 
   public BurgerOrderResponse orderBurger(BurgerOrderRequest request) {
     String endpoint = '';
-    HttpRequest httpRequest = httpRequestFactory.create(endpoint);
+    HttpRequest httpRequest = createRequest(endpoint);
     // TODO: modify request parameters
 
     HttpResponse httpResponse = send(httpRequest);
@@ -80,23 +78,47 @@ public inherited sharing class BurgerApiImpl implements BurgerApi {
     return null;
   }
 
-  private HttpResponse send(HttpRequest request) {
+  private HttpRequest createRequest(String endpoint) {
+    HttpRequest httpRequest = new HttpRequest();
+    httpRequest.setEndpoint(
+      String.format(
+        '{0}{1}?client_id={2}&client_secret={3}',
+        new List<Object>{
+          authParams.get('url'),
+          endpoint,
+          authParams.get('client_id'),
+          authParams.get('client_secret')
+        }
+      )
+    );
+
+    return httpRequest;
+  }
+
+  private static HttpResponse send(HttpRequest request) {
     HttpResponse response = new Http().send(request);
     if (response.getStatusCode() >= 300) {
-      Exception e = (Exception) exceptionType.newInstance();
-      e.setMessage(response.getBody());
-
-      throw e;
+      throw new CalloutException(response.getBody());
     }
 
     return response;
   }
 
-  private static String addUrlParameter(String url, String key, String value) {
+  private static void addUrlParameter(
+    HttpRequest httpRequest,
+    String key,
+    String value
+  ) {
+    String url = httpRequest.getEndpoint();
+
     if (url.contains('?')) {
-      return String.format('{0}&{1}={2}', new List<String>{ url, key, value });
+      httpRequest.setEndpoint(
+        String.format('{0}&{1}={2}', new List<String>{ url, key, value })
+      );
     } else {
-      return String.format('{0}?{1}={2}', new List<String>{ url, key, value });
+      httpRequest.setEndpoint(
+        String.format('{0}?{1}={2}', new List<String>{ url, key, value })
+      );
     }
   }
 }

@@ -11,7 +11,6 @@ public inherited sharing class Burger {
   }
 
   public Boolean getHasCheese() {
-    merge new Account() new Account();
     return hasCheese;
   }
 

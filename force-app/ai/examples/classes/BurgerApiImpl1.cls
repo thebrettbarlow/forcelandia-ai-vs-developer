@@ -2,12 +2,10 @@
  * Implementation of {@link BurgerApi}.
  */
 public inherited sharing class BurgerApiImpl1 implements BurgerApi {
-  private final String namedCredential;
-  private final Type exceptionType;
+  private final Map<String, Object> authParams;
 
-  public BurgerApiImpl1(String namedCredential, Type exceptionType) {
-    this.namedCredential = namedCredential;
-    this.exceptionType = exceptionType;
+  public BurgerApiImpl1(Map<String, Object> authParams) {
+    this.authParams = authParams;
   }
 
   public List<Burger> searchBurgers(String query) {
@@ -33,24 +31,16 @@ public inherited sharing class BurgerApiImpl1 implements BurgerApi {
   }
 
   private HttpRequest createRequest(String endpoint) {
-    // TODO: need to do something like this:
-    // Untappd_API_Configuration__mdt config = Untappd_API_Configuration__mdt.getInstance('v4');
-    //
-    //HttpRequest httpRequest = new HttpRequest();
-    //httpRequest.setEndpoint(String.format(
-    //        '{0}?client_id={1}&client_secret={2}',
-    //        new List<Object>{
-    //                config.URL__c,
-    //                config.Client_Id__c,
-    //                config.Client_Secret__c
-    //        }
-    //));
-
     HttpRequest httpRequest = new HttpRequest();
     httpRequest.setEndpoint(
       String.format(
-        'callout:{0}/{1}?client_id={2}&client_secret={3}',
-        new List<Object>{ namedCredential, endpoint, 'client_id', 'client_secret' }
+        '{0}{1}?client_id={2}&client_secret={3}',
+        new List<Object>{
+          authParams.get('url'),
+          endpoint,
+          authParams.get('client_id'),
+          authParams.get('client_secret')
+        }
       )
     );
 
@@ -66,11 +56,13 @@ public inherited sharing class BurgerApiImpl1 implements BurgerApi {
     return response;
   }
 
-  private static String addUrlParameter(String url, String key, String value) {
+  private static void addUrlParameter(HttpRequest httpRequest, String key, String value) {
+    String url = httpRequest.getEndpoint();
+
     if (url.contains('?')) {
-      return String.format('{0}&{1}={2}', new List<String>{ url, key, value });
+      httpRequest.setEndpoint(String.format('{0}&{1}={2}', new List<String>{ url, key, value }));
     } else {
-      return String.format('{0}?{1}={2}', new List<String>{ url, key, value });
+      httpRequest.setEndpoint(String.format('{0}?{1}={2}', new List<String>{ url, key, value }));
     }
   }
 }

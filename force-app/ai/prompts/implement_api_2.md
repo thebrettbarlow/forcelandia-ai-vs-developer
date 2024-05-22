@@ -11,14 +11,15 @@ The first part is to modify request parameters. The second part is to parse the
 response into expected return type.
 
 When you have completed the task, only respond with the specific method that you
-have implemented. Remove all TODO comments.
+have implemented. Remove all TODO comments. Do not omit any part for brevity.
 
 The result of modifying request parameters must meet the following requirements:
 
+- Use string concatenation to construct the `endpoint` URL
 - Review the API documentation to see if parameters need to be passed in the URL
   or the request body
-- Assume that the `HttpRequestFactory` has returned an `HttpRequest` that
-  already has all authentication-related parameters set
+- Assume that the `createRequest(String endpoint)` has returned an `HttpRequest`
+  that already has all authentication-related parameters set
 
 The result of parsing the response into expected return type must meet the
 following requirements:
@@ -27,6 +28,11 @@ following requirements:
 - Review the API documentation to see if the `result` should be a
   `Map<String, Object>` or `List<Object>`
 - Review the API documentation to see how to extract data from the `result`
+- Use the builder pattern to return the value in this object:
+
+```apex
+// TODO: add return data structure here
+```
 
 For example, here is the correct implementation of the `BurgerApi.searchBurgers`
 and `BurgerApi.orderBurger` methods:
@@ -34,7 +40,7 @@ and `BurgerApi.orderBurger` methods:
 ```apex
 public List<Burger> searchBurgers(String query) {
   String endpoint = '/search/burger';
-  HttpRequest httpRequest = httpRequestFactory.create(endpoint);
+  HttpRequest httpRequest = createRequest(endpoint);
   httpRequest.setMethod('GET');
   addUrlParameter(httpRequest, 'q', query);
 
@@ -59,7 +65,7 @@ public List<Burger> searchBurgers(String query) {
 
 public BurgerOrderResponse orderBurger(BurgerOrderRequest request) {
   String endpoint = '/burger';
-  HttpRequest httpRequest = httpRequestFactory.create(endpoint);
+  HttpRequest httpRequest = createRequest(endpoint);
   httpRequest.setMethod('POST');
   httpRequest.setBody(request.toJson());
 

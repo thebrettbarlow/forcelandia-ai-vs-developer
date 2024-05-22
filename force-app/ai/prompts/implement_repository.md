@@ -10,13 +10,13 @@ Your task is to implement an Interface that represents a Repository (following
 the Repository Pattern). The result must meet the following requirements:
 
 - Methods that start with `get` should perform a SOQL query
-- Methods that start with `insert` should use the `insert` Apex DML statement
-- Methods that start with `update` should use the `update` Apex DML statement
-- Methods that start with `upsert` should use the `upsert` Apex DML statement
-- Methods that start with `delete` should use the `delete` Apex DML statement
+- Methods that start with `insert` should use the `insert` DML statement
+- Methods that start with `update` should use the `update` DML statement
+- Methods that start with `upsert` should use the `upsert` DML statement
+- Methods that start with `delete` should use the `delete` DML statement
 - Methods that start with `undelete` should use the `undelete` Apex DML
   statement
-- Methods that start with `merge` should use the `merge` Apex DML statement
+- Methods that start with `merge` should use the `merge` DML statement
 - Do not include additional methods or properties
 
 For example, here is an Interface with a correctly implemented Apex Class:
@@ -81,4 +81,4 @@ Optionally include custom instructions here.
 
 [//]:
   #
-  "For example: `UntappdBrewery`, `UntappdBeer` and `UntappdCheckIn` classes all have a `toSObject()` method. Use this to convert the object into an SObject before performing DML. All of the SObjects have an External Id field named `Untappd_Id__c`."
+  "For example: `UntappdBrewery`, `UntappdBeer` and `UntappdCheckIn` classes all have a `toSObject()` method. Use this to convert the object into an SObject before performing DML. All of the SObjects have an External Id field named `Untappd_Id__c`. Perform DML and then return the SObjects in 2 statements."

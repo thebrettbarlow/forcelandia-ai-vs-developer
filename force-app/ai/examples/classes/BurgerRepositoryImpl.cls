@@ -7,11 +7,6 @@ public inherited sharing class BurgerRepositoryImpl implements BurgerRepository 
   }
 
   public List<Burger__c> getBurgersWithCheese(Boolean hasCheese) {
-    Type exceptionType = Type.forName('System.QueryException');
-
-    QueryException queryException = (QueryException) exceptionType.newInstance();
-    queryException.setMessage('This is a test exception');
-
     return [SELECT Id FROM Burger__c WHERE Has_Cheese__c = :hasCheese];
   }
 
