@@ -28,7 +28,7 @@
         "trailingComma": "none",
         "bracketSameLine": true,
         "xmlSortAttributesByKey": true,
-        "xmlWhitespaceSensitivity": "ignore"
+        "xmlWhitespaceSensitivity": "preserve"
       }
     },
     {
