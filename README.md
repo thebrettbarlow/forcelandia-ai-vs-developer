@@ -106,5 +106,6 @@ sf project retrieve start \
   --metadata="Layout:Untappd_API_Configuration__mdt-Untappd API Configuration Layout" \
   --metadata=Flexipage:Account_Record_Page \
   --metadata=Flexipage:Beer_Record_Page \
-  --metadata=Flexipage:Check_In_Record_Page
+  --metadata=Flexipage:Check_In_Record_Page \
+  --metadata=RemoteSiteSetting:Untappd_API
 ```
