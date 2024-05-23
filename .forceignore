@@ -3,7 +3,7 @@
 #
 
 package.xml
-*.md
+**/*.md
 
 # LWC configuration files
 **/jsconfig.json
