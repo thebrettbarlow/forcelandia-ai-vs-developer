@@ -82,4 +82,37 @@ public inherited sharing class BurgerApiImpl2 implements BurgerApi {
       httpRequest.setEndpoint(String.format('{0}?{1}={2}', new List<String>{ url, key, value }));
     }
   }
+
+  private static Datetime parseCreatedAt(String createdAt) {
+    Map<String, Integer> monthMap = new Map<String, Integer>{
+      'Jan' => 1,
+      'Feb' => 2,
+      'Mar' => 3,
+      'Apr' => 4,
+      'May' => 5,
+      'Jun' => 6,
+      'Jul' => 7,
+      'Aug' => 8,
+      'Sep' => 9,
+      'Oct' => 10,
+      'Nov' => 11,
+      'Dec' => 12
+    };
+    List<String> dateParts = createdAt.split(' ');
+    List<String> timeParts = dateParts[4].split(':');
+
+    Date d = Date.newInstance(
+      Integer.valueOf(dateParts[3]),
+      monthMap.get(dateParts[2]),
+      Integer.valueOf(dateParts[1])
+    );
+    Time t = Time.newInstance(
+      Integer.valueOf(timeParts[0]),
+      Integer.valueOf(timeParts[1]),
+      Integer.valueOf(timeParts[2]),
+      0
+    );
+
+    return Datetime.newInstanceGmt(d, t);
+  }
 }

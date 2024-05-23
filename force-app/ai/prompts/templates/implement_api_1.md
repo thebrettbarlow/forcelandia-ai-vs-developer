@@ -17,10 +17,12 @@ meet the following requirements:
 - Include a `private HttpResponse send(HttpRequest request)` method
   - When the response contains a status code >= 300, throw a CalloutException
 - Include a
-  `private static String addUrlParameter(String url, String key, String value)`
+  `private static void addUrlParameter(String url, String key, String value)`
   method
   - This method should return a new URL with the key-value pair added as a query
     parameter
+- Include a `private static Datetime parseCreatedAt(String createdAt)` method
+  - This method should parse the `createdAt` string into a `Datetime` object
 - Implement each method to meet the following requirements:
   - Create a new `HttpRequest` using `createRequest(String endpoint)`
   - Leave the `endpoint` variable as an empty `String`
@@ -120,6 +122,39 @@ public inherited sharing class BurgerApiImpl implements BurgerApi {
         String.format('{0}?{1}={2}', new List<String>{ url, key, value })
       );
     }
+  }
+
+  private static Datetime parseCreatedAt(String createdAt) {
+    Map<String, Integer> monthMap = new Map<String, Integer>{
+      'Jan' => 1,
+      'Feb' => 2,
+      'Mar' => 3,
+      'Apr' => 4,
+      'May' => 5,
+      'Jun' => 6,
+      'Jul' => 7,
+      'Aug' => 8,
+      'Sep' => 9,
+      'Oct' => 10,
+      'Nov' => 11,
+      'Dec' => 12
+    };
+    List<String> dateParts = createdAt.split(' ');
+    List<String> timeParts = dateParts[4].split(':');
+
+    Date d = Date.newInstance(
+      Integer.valueOf(dateParts[3]),
+      monthMap.get(dateParts[2]),
+      Integer.valueOf(dateParts[1])
+    );
+    Time t = Time.newInstance(
+      Integer.valueOf(timeParts[0]),
+      Integer.valueOf(timeParts[1]),
+      Integer.valueOf(timeParts[2]),
+      0
+    );
+
+    return Datetime.newInstanceGmt(d, t);
   }
 }
 ```
