@@ -4,15 +4,23 @@
 public with sharing class UntappdAdapter implements valence.SourceAdapterScopeSerializer {
 
 	public static void testEndpoint() {
-		callAPI('search/brewery', new Map<String, String>{
-			'q' => 'Deschutes'
+		callAPI('search/beer', new Map<String, String>{
+			'q'=>'deschutes',
+			'limit'=>'50',
+			'sort'=>'name'
 		});
+		/*callAPI('brewery/checkins/441', new Map<String, String>{
+			'max_id'=>'1392871344'
+		});*/
+		/*callAPI('search/brewery', new Map<String, String>{
+			'q' => 'Deschutes' // 441
+		});*/
 	}
 
 	private static final String endpointURL = 'https://api.untappd.com/v4/';
 
 	public valence.FetchStrategy planFetch(valence.LinkContext context) {
-		return null;
+		return valence.FetchStrategy.immediate();
 	}
 
 	public List<valence.RecordInFlight> fetchRecords(valence.LinkContext context, Object scope) {
