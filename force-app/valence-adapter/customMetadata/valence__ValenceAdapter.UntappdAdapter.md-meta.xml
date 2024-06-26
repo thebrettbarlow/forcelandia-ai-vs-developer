@@ -20,11 +20,11 @@
     </values>
     <values>
         <field>valence__RequiresNamedCredentialForData__c</field>
-        <value xsi:type="xsd:boolean">true</value>
+        <value xsi:type="xsd:boolean">false</value>
     </values>
     <values>
         <field>valence__RequiresNamedCredentialForSchema__c</field>
-        <value xsi:type="xsd:boolean">true</value>
+        <value xsi:type="xsd:boolean">false</value>
     </values>
     <values>
         <field>valence__SourceConfig__c</field>
