@@ -3,7 +3,6 @@
 #
 
 package.xml
-**/*.md
 
 # LWC configuration files
 **/jsconfig.json
@@ -11,3 +10,7 @@ package.xml
 
 # LWC Jest
 **/__tests__/**
+
+# Ignore the AI examples
+force-app/ai/examples
+force-app/ai/experimental
