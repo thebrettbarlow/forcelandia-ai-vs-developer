@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Brewery Finder</label>
+    <protected>false</protected>
+    <values>
+        <field>valence__Adapter__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>valence__AutomatedReplays__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>valence__BatchRetentionDuration__c</field>
+        <value xsi:type="xsd:double">30.0</value>
+    </values>
+    <values>
+        <field>valence__BatchSize__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>valence__ConcurrentWorkersLimit__c</field>
+        <value xsi:type="xsd:double">10.0</value>
+    </values>
+    <values>
+        <field>valence__EnableFingerprinting__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>valence__EnableParallelProcessing__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>valence__ExternalTableLabel__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>valence__ExternalTableName__c</field>
+        <value xsi:type="xsd:string">Deprecated</value>
+    </values>
+    <values>
+        <field>valence__FullRunAlways__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>valence__InboundBatchSize__c</field>
+        <value xsi:type="xsd:double">4900.0</value>
+    </values>
+    <values>
+        <field>valence__InternalTable__c</field>
+        <value xsi:type="xsd:string">Account</value>
+    </values>
+    <values>
+        <field>valence__IsActive__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>valence__IsInbound__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>valence__IsTest__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>valence__LoggingLevel__c</field>
+        <value xsi:type="xsd:string">All</value>
+    </values>
+    <values>
+        <field>valence__MaxAutomatedReplayAttempts__c</field>
+        <value xsi:type="xsd:double">20.0</value>
+    </values>
+    <values>
+        <field>valence__Model__c</field>
+        <value xsi:type="xsd:string">Pull</value>
+    </values>
+    <values>
+        <field>valence__NamedCredentialLabel__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>valence__NamedCredentialName__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>valence__Notes__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>valence__OutboundBatchSize__c</field>
+        <value xsi:type="xsd:double">2000.0</value>
+    </values>
+    <values>
+        <field>valence__RecordSnapshotLoggingLevel__c</field>
+        <value xsi:type="xsd:string">All</value>
+    </values>
+    <values>
+        <field>valence__RecordSnapshotRetentionDuration__c</field>
+        <value xsi:type="xsd:double">30.0</value>
+    </values>
+    <values>
+        <field>valence__RunAfter__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>valence__ScheduleConfig__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>valence__SourceAdapterConfig__c</field>
+        <value xsi:type="xsd:string">{&quot;q&quot;:&quot;Deschutes&quot;}</value>
+    </values>
+    <values>
+        <field>valence__SourceAdapter__c</field>
+        <value xsi:type="xsd:string">UntappdAdapter</value>
+    </values>
+    <values>
+        <field>valence__SourceLabel__c</field>
+        <value xsi:type="xsd:string">Brewery Search</value>
+    </values>
+    <values>
+        <field>valence__SourceName__c</field>
+        <value xsi:type="xsd:string">search_brewery</value>
+    </values>
+    <values>
+        <field>valence__SourceNamedCredentialName__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>valence__SourceTableDetails__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>valence__SyncEventRetentionDuration__c</field>
+        <value xsi:type="xsd:double">90.0</value>
+    </values>
+    <values>
+        <field>valence__SyncRecordRetentionDuration__c</field>
+        <value xsi:type="xsd:double">30.0</value>
+    </values>
+    <values>
+        <field>valence__TargetAdapterConfig2__c</field>
+        <value xsi:type="xsd:string">{&quot;upsertField&quot;:&quot;Untappd_Id__c&quot;,&quot;ignoreUnchangedRecords&quot;:false,&quot;ignoreUnchangedRecordsExclusionList&quot;:[],&quot;picklistMergeExclusionList&quot;:[]}</value>
+    </values>
+    <values>
+        <field>valence__TargetAdapterConfig__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>valence__TargetAdapter__c</field>
+        <value xsi:type="xsd:string">valence__LocalSalesforce</value>
+    </values>
+    <values>
+        <field>valence__TargetLabel__c</field>
+        <value xsi:type="xsd:string">Account</value>
+    </values>
+    <values>
+        <field>valence__TargetName__c</field>
+        <value xsi:type="xsd:string">Account</value>
+    </values>
+    <values>
+        <field>valence__TargetNamedCredentialName__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>valence__TargetTableDetails__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>valence__TestingMode__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+</CustomMetadata>

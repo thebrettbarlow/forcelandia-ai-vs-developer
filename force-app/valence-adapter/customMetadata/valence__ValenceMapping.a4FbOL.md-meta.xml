@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>a4FbOL</label>
+    <protected>false</protected>
+    <values>
+        <field>valence__ExternalFieldLabel__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>valence__ExternalFieldName__c</field>
+        <value xsi:type="xsd:string">Deprecated</value>
+    </values>
+    <values>
+        <field>valence__ForeignKeyField__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>valence__IgnoreNulls__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>valence__InternalField__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>valence__InternalObject__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>valence__IsActive__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>valence__IsRelationship__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>valence__LinkSplit__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>valence__Link__c</field>
+        <value xsi:type="xsd:string">axq2uX</value>
+    </values>
+    <values>
+        <field>valence__RelatedField__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>valence__RelatedObject__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>valence__SourceAncestor01__c</field>
+        <value xsi:type="xsd:string">&quot;brewery&quot;</value>
+    </values>
+    <values>
+        <field>valence__SourceAncestor02__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>valence__SourceAncestor03__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>valence__SourceAncestor04__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>valence__SourceAncestor05__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>valence__SourceIsArtificial__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>valence__SourceLabel__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>valence__SourceLists__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>valence__SourceName__c</field>
+        <value xsi:type="xsd:string">&quot;brewery_name&quot;</value>
+    </values>
+    <values>
+        <field>valence__Source__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>valence__TargetAncestor01__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>valence__TargetAncestor02__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>valence__TargetAncestor03__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>valence__TargetAncestor04__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>valence__TargetAncestor05__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>valence__TargetLabel__c</field>
+        <value xsi:type="xsd:string">Account Name</value>
+    </values>
+    <values>
+        <field>valence__TargetLists__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>valence__TargetName__c</field>
+        <value xsi:type="xsd:string">&quot;Name&quot;</value>
+    </values>
+    <values>
+        <field>valence__Target__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>valence__UseAsExternalId__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+</CustomMetadata>
