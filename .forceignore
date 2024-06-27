@@ -12,5 +12,4 @@ package.xml
 **/__tests__/**
 
 # Ignore the AI examples
-force-app/ai/examples
-force-app/ai/experimental
+force-app/ai/
