@@ -3,7 +3,7 @@ The first part is to modify request parameters. The second part is to parse the
 response into expected return type.
 
 When you have completed the task, only respond with the specific method that you
-have implemented. Remove all TODO comments. Do not omit any part for brevity.
+have implemented. Remove all TODO comments.
 
 The result of modifying request parameters must meet the following requirements:
 
