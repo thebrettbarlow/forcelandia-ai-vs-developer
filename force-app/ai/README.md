@@ -4,12 +4,6 @@ Contains files used by Team AI to solve the coding challenge.
 
 ---
 
-## TODOs
-
-- [ ] End-to-end testing
-  - Finding that the API explorer has more accurate example responses
-- [ ] Outline the key takeaways
-
 ## Technical Design
 
 ### Objective
