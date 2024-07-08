@@ -13,7 +13,7 @@ sf org create scratch \
 
 echo "Installing latest Valence version..."
 sf package install \
-  --package=04tKY000000sxxz \
+  --package=04tKY0000000RD4 \
   --wait=20
 
 echo "Pushing project metadata..."
