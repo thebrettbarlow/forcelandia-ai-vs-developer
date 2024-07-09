@@ -3,20 +3,6 @@
  */
 global with sharing class UntappdAdapter implements valence.SourceAdapterScopeSerializer, valence.SchemaAdapter, valence.ConfigurableSourceAdapter {
 
-	public static void testEndpoint() {
-		/*callAPI('search/beer', new Map<String, String>{
-			'q'=>'deschutes',
-			'limit'=>'50',
-			'sort'=>'name'
-		});*/
-		/*callAPI('brewery/checkins/441', new Map<String, String>{
-			'max_id'=>'1392871344'
-		});*/
-		callAPI('search/brewery', new Map<String, String>{
-			'q' => 'beer' // 441
-		});
-	}
-
 	private static final String endpointURL = 'https://api.untappd.com/v4/';
 
 	private SourceConfiguration sourceConfig;
