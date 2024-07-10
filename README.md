@@ -40,7 +40,8 @@ Notes about schema:
 
 ### Connect to the Dev Hub
 
-(There is a script in the 'scripts' folder you can use to build the org with one command)
+(There is a script in the 'scripts' folder you can use to build the org with one
+command)
 
 ```shell
 org_alias="forcelandia-ai-vs-dev"

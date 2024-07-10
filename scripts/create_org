@@ -36,4 +36,4 @@ sf data record update \
 
 echo "Opening org..."
 sf org open \
- --path=lightning/n/valence__Valence
+  --path=lightning/n/valence__Valence
