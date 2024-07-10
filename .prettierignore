@@ -2,3 +2,4 @@ node_modules/
 sf_modules/
 **/staticresources/
 .forceignore
+force-app/valence-adapter

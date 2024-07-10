@@ -13,6 +13,7 @@
     "*.md",
     "LICENSE",
     "package.json",
-    "sfdx-project.json"
+    "sfdx-project.json",
+    "force-app/valence-adapter"
   ]
 }
