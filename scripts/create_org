@@ -1,0 +1,39 @@
+#!/bin/bash
+
+# Run this script to set up a scratch org for development
+
+org_alias="forcelandia-ai-vs-dev--scratch"
+
+echo "Creating scratch org..."
+sf org create scratch \
+  --alias="${org_alias}" \
+  --definition-file=config/project-scratch-def.json \
+  --duration-days=30 \
+  --set-default
+
+echo "Installing latest Valence version..."
+sf package install \
+  --package=04tKY000000kZpX \
+  --wait=20
+
+echo "Pushing project metadata..."
+sf project deploy start \
+  --source-dir=force-app \
+  --wait=10 \
+  --ignore-conflicts \
+  --verbose
+
+echo "Assigning permission sets..."
+sf org assign permset \
+  --name=Forcelandia_AI_vs_Dev \
+  --name=Valence_User
+
+echo "Setting Debug Mode on User..."
+sf data record update \
+  --sobject=User \
+  --where="Name='User User'" \
+  --values="UserPreferencesUserDebugModePref=true"
+
+echo "Opening org..."
+sf org open \
+ --path=lightning/n/valence__Valence
