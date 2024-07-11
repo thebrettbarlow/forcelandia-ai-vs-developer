@@ -40,9 +40,6 @@ Notes about schema:
 
 ### Connect to the Dev Hub
 
-(There is a script in the 'scripts' folder you can use to build the org with one
-command)
-
 ```shell
 org_alias="forcelandia-ai-vs-dev"
 
@@ -54,43 +51,12 @@ sf org login web \
 ### Make a scratch org
 
 ```shell
-org_alias="forcelandia-ai-vs-dev--scratch"
-
-sf org create scratch \
-  --alias="${org_alias}" \
-  --definition-file=config/project-scratch-def.json \
-  --duration-days=30 \
-  --set-default
-
-sf project deploy start \
-  --source-dir=force-app \
-  --wait=10 \
-  --ignore-conflicts \
-  --verbose
-```
-
-### Assign permission sets
-
-```shell
-target_org="forcelandia-ai-vs-dev--scratch"
-
-sf org assign permset \
-  --target-org="${target_org}" \
-  --name=Forcelandia_AI_vs_Dev
-```
-
-### Run all tests
-
-```shell
-target_org="forcelandia-ai-vs-dev--scratch"
-
-sf apex test run \
-  --target-org="${target_org}" \
-  --wait=10 \
-  --code-coverage
+./scripts/create_org
 ```
 
 ### Retrieve non-code metadata
+
+This is useful for getting metadata during the development process.
 
 ```shell
 target_org="forcelandia-ai-vs-dev--scratch"
