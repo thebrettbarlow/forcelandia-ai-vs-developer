@@ -19,6 +19,8 @@
     "format": "prettier --write . && eslint . --fix",
     "lint": "prettier --check . && eslint .",
     "prepare": "husky",
+    "sf:deploy:result": "sf project deploy start --ignore-conflicts --source-dir=force-app/ai/result",
+    "sf:deploy:working": "sf project deploy start --ignore-conflicts --source-dir=force-app/ai/working",
     "sf:open": "sf org open --path=lightning/o/Beer__c/list",
     "sf:validate": "sf project deploy start --source-dir=force-app --test-level=RunLocalTests --concise --ignore-conflicts --dry-run"
   },
